@@ -64,4 +64,7 @@ Option to also assign the response to your global environment as the variable MS
   
 	User_IDs <- MSGraph("https://graph.microsoft.com/v1.0/users?$select=id")
 
+
+
 	User_IDs <- "https://graph.microsoft.com/v1.0/users?$select=id" %>% MSGraph()
+
