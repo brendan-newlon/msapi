@@ -40,17 +40,17 @@ You can use pipes for a clearer view of your queries:
 	SP(Username = "{USER EMAIL}")
 
 
-For more information about how to construct queries, see the SharePoint REST API documentation: https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/complete-basic-operations-using-sharepoint-rest-endpoints
+For more information about how to construct queries, see the [SharePoint REST API documentation](https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/complete-basic-operations-using-sharepoint-rest-endpoints)
 
-To further refine your queries, see the OData documentation: https://www.odata.org/documentation/
+To further refine your queries, see the [OData documentation](https://www.odata.org/documentation/)
 
 ## MSGraph
 
 This function allows R to send normally constructed MS Office Graph queries and return the response as a simple data.frame. 
 
-For more information about how to construct queries, see the Office Graph Developer Demo: https://developer.microsoft.com/en-us/graph/graph-explorer
+For more information about how to construct queries, see the [Office Graph Developer Demo](https://developer.microsoft.com/en-us/graph/graph-explorer)
 
-To further refine your queries, see the OData documentation: https://www.odata.org/documentation/
+To further refine your queries, see the [OData documentation](https://www.odata.org/documentation/)
 
 
 ### Arguments 
