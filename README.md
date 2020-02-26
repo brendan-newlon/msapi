@@ -66,3 +66,6 @@ Option to also assign the response to your global environment as the variable MS
 
 	User_IDs <- "https://graph.microsoft.com/v1.0/users?$select=id" %>% MSGraph()
 
+
+## Acknowledgements
+Many thanks to LukasK13. I learned (and wholesale copied some chunks of code) from his [sharepointr](https://github.com/LukasK13/sharepointr) package.
