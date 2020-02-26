@@ -13,19 +13,19 @@ An R package for simple, flexible REST API calls to MS Office Graph and SharePoi
 This function allows R to send normally constructed SharePoint queries and return the response as a simple data.frame. 
 
 ### Arguments 
-- query
+- `query`
 The full URL for the query to send to the MS Office Graph or SharePoint API
-- Username 
+- `Username` 
 Your email for authentication on the SharePoint server
-- Method 
+- `Method` 
 Defaults to GET but also supports POST. MERGE support hasn't been written in yet.
-- acceptLanguage 
+- `acceptLanguage`
 Defaults to en
-- reenterPassword 
+- `reenterPassword` 
 Option to manually clear your password
-- refreshTokens 
+- `refreshTokens` 
 Option to manually clear all tokens, for example, to connect from a different user account
-- tokens_timeout_in_hours 
+- `tokens_timeout_in_hours`
 Set number of hours before new tokens will be requested. The default is 3, but regardless, new token requests will be handled as needed automatically.
 
 
@@ -55,13 +55,13 @@ To further refine your queries, see the OData documentation: https://www.odata.o
 
 ### Arguments 
 
-- query 
+- `query` 
 The full URL for the query to send to the MS Office Graph or SharePoint API
-- handle_pagination 
+- `handle_pagination` 
 Defaults to TRUE to automatically continue requesting until all data has been received
-- reset_token 
+- `reset_token` 
 Option to manually reset your access token
-- assign_responses 
+- `assign_responses` 
 Option to also assign the response to your global environment as the variable MSGraph_latestResponse. This is helpful for debugging if your response isn't what you expected, or if you want to have the option to interrupt the operation while keeping as much data as has been received up to that point.
 
 ### Examples
