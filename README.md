@@ -67,15 +67,3 @@ Option to also assign the response to your global environment as the variable MS
 EXAMPLE:
   
 	User_IDs <- MSGraph("https://graph.microsoft.com/v1.0/users?$select=id")
-
-
-# delete_all_neo4j
-
-WARNING: This function deletes all nodes and relationships in your current Neo4j database. The function does not take any arguments.
-
-This function comes in handy if you're developing a repeatable process to build your graph database and you want 
-to repeatedly experiment and return to a blank slate. 
-
-EXAMPLE:
-
-	delete_all_neo4j() # WARNING - This will delete EVERYTHING in your graph database!
