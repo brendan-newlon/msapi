@@ -3,9 +3,9 @@ An R package for simple, flexible REST API calls to MS Office Graph and SharePoi
 
 # Installation
 
-  library(devtools)
-  install_github("brendan-newlon/msapi")
-  library(msapi)
+	library(devtools)
+	install_github("brendan-newlon/msapi")
+	library(msapi)
     
 
 # SP
@@ -31,11 +31,11 @@ Set number of hours before new tokens will be requested. The default is 3, but r
 
 EXAMPLE
 
-  ListItems <- SP("https://{YOUR TENANT}.sharepoint.com/sites/_api/Web/Lists(guid'{THE ID OF YOUR LIST}')/Items", Username = "{YOUR AUTHENTICATION EMAIL}")
+	ListItems <- SP("https://{YOUR TENANT}.sharepoint.com/sites/_api/Web/Lists(guid'{THE ID OF YOUR LIST}')/Items", Username = "{YOUR AUTHENTICATION EMAIL}")
 
 You can use pipes for a clearer view of your queries:
 
-  ListItems <- "https://{YOUR TENANT}.sharepoint.com/sites/_api/Web/Lists(guid'{THE ID OF YOUR LIST}')/Items" %>% SP(Username = "{YOUR AUTHENTICATION EMAIL}")
+	ListItems <- "https://{YOUR TENANT}.sharepoint.com/sites/_api/Web/Lists(guid'{THE ID OF YOUR LIST}')/Items" %>% SP(Username = "{YOUR AUTHENTICATION EMAIL}")
 
 
 For more information about how to construct queries, see the SharePoint REST API documentation: https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/complete-basic-operations-using-sharepoint-rest-endpoints
@@ -64,7 +64,7 @@ Option to also assign the response to your global environment as the variable MS
 
 EXAMPLE:
   
-  User_IDs <- MSGraph("https://graph.microsoft.com/v1.0/users?$select=id")
+	User_IDs <- MSGraph("https://graph.microsoft.com/v1.0/users?$select=id")
 
 
 # delete_all_neo4j
