@@ -1,18 +1,18 @@
 # msapi
 An R package for simple, flexible REST API calls to MS Office Graph and SharePoint.
 
-# Installation
+## Installation
 
 	library(devtools)
 	install_github("brendan-newlon/msapi")
 	library(msapi)
     
 
-# SP
+## SP
 
 This function allows R to send normally constructed SharePoint queries and return the response as a simple data.frame. 
 
-ARGUMENTS 
+### ARGUMENTS 
 - query
 The full URL for the query to send to the MS Office Graph or SharePoint API
 - Username 
@@ -29,7 +29,7 @@ Option to manually clear all tokens, for example, to connect from a different us
 Set number of hours before new tokens will be requested. The default is 3, but regardless, new token requests will be handled as needed automatically.
 
 
-EXAMPLE
+### EXAMPLE
 
 	ListItems <- SP("https://{TENANT}.sharepoint.com/sites/_api/Web/Lists(guid'{LIST ID}')/Items", 
 	Username = "{USER EMAIL}")
@@ -44,7 +44,7 @@ For more information about how to construct queries, see the SharePoint REST API
 
 To further refine your queries, see the OData documentation: https://www.odata.org/documentation/
 
-# MSGraph
+## MSGraph
 
 This function allows R to send normally constructed MS Office Graph queries and return the response as a simple data.frame. 
 
@@ -53,7 +53,7 @@ For more information about how to construct queries, see the Office Graph Develo
 To further refine your queries, see the OData documentation: https://www.odata.org/documentation/
 
 
-ARGUMENTS 
+### ARGUMENTS 
 
 - query 
 The full URL for the query to send to the MS Office Graph or SharePoint API
@@ -64,7 +64,7 @@ Option to manually reset your access token
 - assign_responses 
 Option to also assign the response to your global environment as the variable MSGraph_latestResponse. This is helpful for debugging if your response isn't what you expected, or if you want to have the option to interrupt the operation while keeping as much data as has been received up to that point.
 
-EXAMPLE:
+### EXAMPLE:
   
 	User_IDs <- MSGraph("https://graph.microsoft.com/v1.0/users?$select=id")
 
