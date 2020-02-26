@@ -1,7 +1,7 @@
 # msapi
 An R package for simple, flexible REST API calls to MS Office Graph and SharePoint.
 
-## Installation
+### Installation
 
 	library(devtools)
 	install_github("brendan-newlon/msapi")
