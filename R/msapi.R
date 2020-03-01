@@ -140,7 +140,14 @@ ipak <- function(pkg){
 packages <- c("httr","jsonlite", "utf8","curl", "lubridate", "tidyr", "keyring", "dplyr", "purrr", "rlang", "xml2", "svDialogs","stringr","magrittr")
 ipak(packages)
 
+
+
+#' as.df
+#' @export
+#'
+
 as.df <- function(x) {x <- as.data.frame(x,stringsAsFactors = FALSE)}
+
 `%notin%` <- Negate(`%in%`)
 
 
@@ -158,6 +165,10 @@ as.df <- function(x) {x <- as.data.frame(x,stringsAsFactors = FALSE)}
 #================================================
 
 ## ____________________________________________________________________ Function getSP_SecToken()
+
+#' getSP_SecToken
+#' @export
+#'
 
 getSP_SecToken <- function(query, Username) {
   if (!exists("Address")) {
@@ -212,6 +223,11 @@ getSP_SecToken <- function(query, Username) {
 
 
 # ____________________________________________________________________ Function getSP_AuthToken()
+
+#' getSP_AuthToken
+#' @export
+#'
+
 getSP_AuthToken <- function(query, Username) {
   if ("SP_SecToken" %in% key_list("SP_SecToken")$service) {
     SecToken <- key_get("SP_SecToken")
@@ -245,6 +261,12 @@ getSP_AuthToken <- function(query, Username) {
 
 # ____________________________________________________________________ Function sp_clear_keys()
 
+
+#' sp_clear_keys
+#' @export
+#'
+
+
 sp_clear_keys <- function() {
   if ("SP_token" %in% key_list("SP_token")$service) {key_delete("SP_token")}
   if ("SP_p" %in% key_list("SP_p")$service) {key_delete("SP_p")}
@@ -257,6 +279,11 @@ sp_clear_keys <- function() {
 
 # ____________________________________________________________________ Function sp_cleanup_variables()
 
+#' sp_cleanup_variables
+#' @export
+#'
+
+
 sp_cleanup_variables <- function() {
   sp_clear_keys()
   rm(SPCon,SP_pass,SP_query,SP_response,SP_response_clean,SP_response_JSON,SP_response_raw,SecToken,token,response_JSON,response_raw,query,headers,Address_base,Address,acceptLanguage,auth,cookie,request,Username,getSP_SecToken,response,response1,response2,response3,response_clean,content)
@@ -264,6 +291,11 @@ sp_cleanup_variables <- function() {
 
 
 # ____________________________________________________________________ Function SP.send.query()
+
+#' SP.send.query
+#' @export
+#'
+
 
 SP.send.query <- function(Method, query, Username) {
   ##################################### Here we actually send the query
@@ -303,13 +335,26 @@ SP.send.query <- function(Method, query, Username) {
 
 # ____________________________________________________________________ Function SP.handle.pagination()  & supporting functions
 
+#' recursive.unlist.cols
+#' @export
+#'
+
 recursive.unlist.cols <- function(l) {
   if (!is.list(l)) return(l)
   do.call('rbind', lapply(l, function(x) `length<-`(x, max(lengths(l)))))
 }
 
+
+#' super.flatten
+#' @export
+#'
+
 super.flatten <- function(x){x <- x %>% jsonlite::flatten(recursive = TRUE) %>% recursive.unlist.cols() %>% t() %>% as.df() %>% mutate_all(as.character)}
 
+
+#' remove.empty.cols
+#' @export
+#'
 
 remove.empty.cols <- function(df){
   df <- df[,colSums(is.na(df))<nrow(df)]
@@ -317,12 +362,23 @@ remove.empty.cols <- function(df){
   return(df)
 }
 
+
+#' cleaner.names
+#' @export
+#'
+
 cleaner.names <- function(x) {
   names(x) <- names(x) %>% gsub("_x0020_|\\.","_",.)
   names(x) <- names(x) %>% gsub("__|___","_",.)
   names(x) <- names(x) %>% gsub("^_|_x0027_","",.)
   return(x)
 }
+
+
+
+#' SP.handle.pagination
+#' @export
+#'
 
 
 SP.handle.pagination <- function(Method, query, Username){
@@ -434,9 +490,23 @@ SP.handle.pagination <- function(Method, query, Username){
 # `%notin%` <- Negate(`%in%`)
 
 #__________________________________________________MSGraph_delete_token()
+
+
+#' MSGraph_delete_token
+#' @export
+#'
+
+
 MSGraph_delete_token <- function(){if ("MSO_Graph_Token" %in% key_list("MSO_Graph_Token")$service) {key_delete("MSO_Graph_Token")}}
 
 #__________________________________________________MSGraph_handle_auth()
+
+
+#' MSGraph_handle_auth
+#' @export
+#'
+
+
 MSGraph_handle_auth <- function(){
   if ("MSO_Graph_Token" %in% key_list("MSO_Graph_Token")$service) {
     auth <- key_get("MSO_Graph_Token")
@@ -455,6 +525,12 @@ MSGraph_handle_auth <- function(){
 }
 
 #__________________________________________________MSGraph_send_query()
+
+
+#' MSGraph_send_query
+#' @export
+#'
+
 MSGraph_send_query <- function(query){
   auth <- MSGraph_handle_auth()
   GraphCon <- GET(query, add_headers(Authorization = auth, Host = "graph.microsoft.com"))
@@ -463,6 +539,12 @@ MSGraph_send_query <- function(query){
 }
 
 #__________________________________________________MSGraph_clean_response()
+
+
+#' MSGraph_clean_response
+#' @export
+#'
+
 MSGraph_clean_response <- function(query) {
   response <- MSGraph_send_query(query)
   # save the original JSON data response - helps as a reference for debugging bad responses
@@ -486,6 +568,12 @@ MSGraph_clean_response <- function(query) {
 }
 
 #__________________________________________________MSGraph_handle_pagination()
+
+
+#' MSGraph_handle_pagination
+#' @export
+#'
+
 MSGraph_handle_pagination <- function(query, handle_pagination, assign_responses){
   response3 <- suppressWarnings(MSGraph_clean_response(query))
 
