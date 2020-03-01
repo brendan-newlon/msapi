@@ -137,7 +137,7 @@ ipak <- function(pkg){
     install.packages(new.pkg, dependencies = TRUE)
   sapply(pkg, require, character.only = TRUE)}
 
-packages <- c("httr","jsonlite", "utf8","curl", "lubridate", "tidyr", "keyring", "dplyr", "purrr", "rlang", "xml2", "svDialogs","stringr","magrittr")
+packages <- c("tidyverse","httr","jsonlite", "utf8","curl", "lubridate", "tidyr", "keyring", "dplyr", "purrr", "rlang", "xml2", "svDialogs","stringr","magrittr")
 ipak(packages)
 
 
