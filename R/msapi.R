@@ -23,6 +23,8 @@
 #' @param tokens_timeout_in_hours Set number of hours before new tokens will be requested.
 #' The default is 3, but regardless, new token requests will be handled as needed automatically.
 #'
+#' @export
+#'
 #'
 #' @return A data.frame with the complete, pagerized response to your query.
 #'
@@ -102,6 +104,7 @@ SP <-
 #' is not what you expected, or if you want to have the option to interrupt the operation
 #' while keeping as much data as has been received up to that point.
 #'
+#' @export
 #'
 #' @return A data.frame with the complete, pagerized response to your query.
 #'
