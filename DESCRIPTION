@@ -1,14 +1,14 @@
 Package: msapi
-Title: An R package for simple, flexible REST API calls to MS Office Graph and SharePoint.
+Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Brendan",
-           family = "Newlon",
+    person(given = "First",
+           family = "Last",
            role = c("aut", "cre"),
-           email = "brendan.newlon@gmail.com",
-           comment = c(ORCID = "0000-0003-3847-7026"))
-Description: This package allows you to perform REST API calls to MS Office Graph or SharePoint with a single line of code.
-License: MIT
+           email = "first.last@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: What the package does (one paragraph).
+License: What license it uses
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2.9000
