@@ -338,7 +338,7 @@ SP.send.query <- function(Method, query, Username) {
     SP_raw <<- append(SP_raw, response_JSON)
     # SP_raw <<- SP_raw
   }
-
+assign("SP_raw", SP_raw, envir = .GlobalEnv)
   # assign("SP_response_JSON", response_JSON, envir = .GlobalEnv)
   return (response_JSON)
 } # end function
