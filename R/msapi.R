@@ -331,12 +331,12 @@ SP.send.query <- function(Method, query, Username) {
 
   # Output the raw JSON for debugging & backup
 
-  if(exists("SP_raw", evir = .GlobalEnv)) {
-    SP_raw <<- append(SP_raw, response_JSON)
+  if(exists("SP_raw", envir = .GlobalEnv)) {
+    SP_raw <- append(SP_raw, response_JSON)
   } else {
-    SP_raw <<- list()
-    SP_raw <<- append(SP_raw, response_JSON)
-    # SP_raw <<- SP_raw
+    SP_raw <- list()
+    SP_raw <- append(SP_raw, response_JSON)
+    # SP_raw <- SP_raw
   }
 assign("SP_raw", SP_raw, envir = .GlobalEnv)
   # assign("SP_response_JSON", response_JSON, envir = .GlobalEnv)
