@@ -332,13 +332,13 @@ SP.send.query <- function(Method, query, Username) {
   # Output the raw JSON for debugging & backup
 
   if(exists("SP_raw", envir = .GlobalEnv)) {
-    SP_raw <- append(SP_raw, response_JSON)
+    SP_raw <<- append(SP_raw, response_JSON)
   } else {
-    SP_raw <- list()
-    SP_raw <- append(SP_raw, response_JSON)
-    # SP_raw <- SP_raw
+    SP_raw <<- list()
+    SP_raw <<- append(SP_raw, response_JSON)
+    # SP_raw <<- SP_raw
   }
-assign("SP_raw", SP_raw, envir = .GlobalEnv)
+
   # assign("SP_response_JSON", response_JSON, envir = .GlobalEnv)
   return (response_JSON)
 } # end function
@@ -396,7 +396,12 @@ SP.handle.pagination <- function(Method, query, Username){
   response_JSON <-  SP.send.query(Method, query, Username)
   response <- fromJSON(response_JSON)
 
-  response_prev <- fromJSON(response_JSON)$d$results %>% super.flatten()
+  response_prev <- fromJSON(response_JSON)$d$results
+
+  if(is.data.frame(response_prev)){
+  response_prev = response_prev %>% super.flatten()
+  }
+
 
   # Set page count for update in the console
   i <- 2
@@ -413,7 +418,12 @@ SP.handle.pagination <- function(Method, query, Username){
       response_JSON <-  SP.send.query(Method, query, Username)
       response <- fromJSON(response_JSON)
 
-      response_next <- fromJSON(response_JSON)$d$results %>% super.flatten()
+      response_next <- fromJSON(response_JSON)$d$results  # %>% super.flatten()
+
+
+      if(is.data.frame(response_next)){
+        response_next = response_next %>% super.flatten()
+      }
 
 
       # Join new results to previous
