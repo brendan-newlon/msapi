@@ -137,7 +137,7 @@ ipak <- function(pkg){
     install.packages(new.pkg, dependencies = TRUE)
   sapply(pkg, require, character.only = TRUE)}
 
-packages <- c("tidyverse","httr","jsonlite", "utf8","curl", "lubridate", "tidyr", "keyring", "dplyr", "purrr", "rlang", "xml2", "svDialogs","stringr","magrittr")
+packages <- c("httr","jsonlite", "utf8","curl", "lubridate", "tidyr", "keyring", "dplyr", "purrr", "rlang", "xml2", "svDialogs","stringr","magrittr", "tidyverse")
 ipak(packages)
 
 
@@ -326,6 +326,17 @@ SP.send.query <- function(Method, query, Username) {
     sp_cleanup_variables()
     # Try again with different credentials
     stop(paste0("The connection was refused with an error:\n\n",response$error$code,"\n",response$error$message$value,"\n\n","Try with different credentials or refresh your tokens using the argument refreshTokens = TRUE.\nIf that fails, consult your SharePoint administrator or tech support staff for more help."))
+  }
+
+
+  # Output the raw JSON for debugging & backup
+
+  if(exists("SP_raw", evir = .GlobalEnv)) {
+    SP_raw <<- append(SP_raw, response_JSON)
+  } else {
+    SP_raw <<- list()
+    SP_raw <<- append(SP_raw, response_JSON)
+    # SP_raw <<- SP_raw
   }
 
   # assign("SP_response_JSON", response_JSON, envir = .GlobalEnv)
