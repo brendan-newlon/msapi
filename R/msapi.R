@@ -54,7 +54,7 @@ SP <-
     if (!exists("Username") ||Username == "" || is_empty(Username)) { stop("Try again with a username.")}
 
     if (query == "") {
-      query <- dlgInput("Enter your query, eg. https://cclonline.sharepoint.com/_api/web/ ")$res %>%
+      query <- dlgInput("Enter your query, eg. https://{YourTenant}.sharepoint.com/_api/web/ ")$res %>%
         gsub(" ","%20",.) # to accomodate spaces in queries in R, but send them properly to web
     }
 
