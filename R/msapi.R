@@ -403,9 +403,9 @@ SP.handle.pagination <- function(Method, query, Username){
     response_prev <- fromJSON(response_JSON)$d
   }
 
-  if(is.data.frame(response_prev)){
+  # if(is.data.frame(response_prev)){
   response_prev = response_prev %>% super.flatten()
-  }
+  # }
 
 
   # Set page count for update in the console
@@ -432,9 +432,9 @@ SP.handle.pagination <- function(Method, query, Username){
       }
 
 
-      if(is.data.frame(response_next)){
+      # if(is.data.frame(response_next)){
         response_next = response_next %>% super.flatten()
-      }
+      # }
 
 
       # Join new results to previous
