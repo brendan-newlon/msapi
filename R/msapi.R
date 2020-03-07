@@ -396,7 +396,12 @@ SP.handle.pagination <- function(Method, query, Username){
   response_JSON <-  SP.send.query(Method, query, Username)
   response <- fromJSON(response_JSON)
 
+
+  if (!is.null(response$d$results)){
   response_prev <- fromJSON(response_JSON)$d$results
+  } else if(!is.null(response$d)){
+    response_prev <- fromJSON(response_JSON)$d
+  }
 
   if(is.data.frame(response_prev)){
   response_prev = response_prev %>% super.flatten()
@@ -418,7 +423,13 @@ SP.handle.pagination <- function(Method, query, Username){
       response_JSON <-  SP.send.query(Method, query, Username)
       response <- fromJSON(response_JSON)
 
-      response_next <- fromJSON(response_JSON)$d$results  # %>% super.flatten()
+
+
+      if (!is.null(response$d$results)){
+        response_next <- fromJSON(response_JSON)$d$results
+      } else if(!is.null(response$d)){
+        response_next <- fromJSON(response_JSON)$d
+      }
 
 
       if(is.data.frame(response_next)){
