@@ -404,7 +404,7 @@ SP.handle.pagination <- function(Method, query, Username){
   }
 
   # if(is.data.frame(response_prev)){
-  response_prev = response_prev %>% super.flatten()
+  response_prev = response_prev %>% as.df %>% super.flatten()
   # }
 
 
@@ -433,7 +433,7 @@ SP.handle.pagination <- function(Method, query, Username){
 
 
       # if(is.data.frame(response_next)){
-        response_next = response_next %>% super.flatten()
+        response_next = response_next %>% as.df %>% super.flatten()
       # }
 
 
