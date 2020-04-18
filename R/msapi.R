@@ -171,6 +171,32 @@ as.df <- function(x) {x <- as.data.frame(x,stringsAsFactors = FALSE)}
 #'
 
 getSP_SecToken <- function(query, Username) {
+
+  ############ make sure it has Username
+
+  # Get Username if stored as a global variable to make the function simpler to use:
+  ask_Username = function(){
+    if ("Username" %in% ls(envir = parent.frame())) {
+      Username = get("Username", envir = parent.frame()) # parent value
+    } else  if ("Username" %in% ls(envir = .GlobalEnv)) {
+      Username = get("Username", envir = .GlobalEnv) # get the value from Global env, not the local NULL value
+
+    } else {
+      Username <- svDialogs::dlg_input(message = "Enter Username: " )$res
+    }
+    return(Username)
+  } # end function ask_Username
+  # Ask for username if not set in global environment
+
+  if(!exists("Username") || is_empty(Username) || is.null(Username)){
+    Username = ask_Username()
+    if (!length(Username)) stop("Please try again with a Username.")  # The user clicked the ’cancel’ button
+  }
+
+
+
+
+  ##########################
   if (!exists("Address")) {
     Address = paste0("https://", regmatches(query,regexpr("[[:alnum:]]{1,}\\.sharepoint\\.com", query)))
   }
@@ -189,8 +215,7 @@ getSP_SecToken <- function(query, Username) {
 
   request = gsub("\\{Address\\}", Address_base, request) # paste address into XML form
   response = httr::POST(url = "https://login.microsoftonline.com/extSTS.srf", body = request) # request security token from microsoft online
-  if (response$status_code != 200)
-    stop("Receiving security token failed.")# Check if request was successful
+  if (response$status_code != 200){    stop("Receiving security token failed.")}# Check if request was successful
   content = as_list(read_xml(rawToChar(response$content))) # decode response content
   SecToken = as.character(
     content$Envelope$Body$RequestSecurityTokenResponse$RequestedSecurityToken$BinarySecurityToken
@@ -214,7 +239,7 @@ getSP_SecToken <- function(query, Username) {
         "No security token was received. The password you entered may have been incorrect. Try again"
       )
     key_set_with_value("SP_p", password = SP_pass)
-    getSP_SecToken() # is it odd to tell the function to start itself over?
+    getSP_SecToken(query, Username) # is it odd to tell the function to start itself over?
   } else {
     key_set_with_value("SP_SecToken", password = SecToken)
   }
@@ -378,14 +403,21 @@ remove.empty.cols <- function(df){
 #' @export
 #'
 
-cleaner.names <- function(x) {
-  names(x) <- names(x) %>% gsub("_x0020_|\\.","_",.)
-  names(x) <- names(x) %>% gsub("__|___","_",.)
-  names(x) <- names(x) %>% gsub("^_|_x0027_","",.)
+# cleaner.names = function (x) {
+#   names(x) <- names(x) %>% gsub("_x0020_|\\.", "_", .)
+#   names(x) <- names(x) %>% gsub("__|___", "_", .)
+#   names(x) <- names(x) %>% gsub("^_|_x0027_", "", .)
+#   names(x) <- names(x) %>% gsub("x002d_|x0028_|x0029_", "", .)
+#   return(x)
+# }
+
+cleaner.names = function (x) {
+  names(x) <- names(x) %>% gsub("_x0020_|\\.", "_", .)
+  names(x) <- names(x) %>% gsub("x0020|x002d|x0027|x0028|x0029|x005f|x005fs", "", .)
+  names(x) <- names(x) %>% gsub("^_|_$", "", .)
+  names(x) <- names(x) %>% gsub("_{2,}", "_", .)
   return(x)
 }
-
-
 
 #' SP.handle.pagination
 #' @export
